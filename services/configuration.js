@@ -1,4 +1,15 @@
-const configurationList = [];
+const configurationList = [
+    {
+        id: 1,
+        color: 0,
+        rangeType: 1
+    },
+    {
+        id: 2,
+        color: 2,
+        rangeType: 2
+    }
+];
 
 function getAllConfigurations() {
     return new Promise((resolve, reject) => {
@@ -9,7 +20,13 @@ function getAllConfigurations() {
 }
 
 function setConfigurations(configuration) {
-    configurationList.push(configuration);
+    configurationList.push({
+            id: configurationList.length,
+            color: configuration.color,
+            rangeType: configuration.rangeType,
+            range: configuration.range
+    });
+
     return new Promise((resolve, reject) => {
         resolve({
             configurations: configurationList
