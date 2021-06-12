@@ -8,6 +8,14 @@ module.exports = function(router) {
     })
   });
 
+  router.get('/getArduinoConfig', (req, res) => {
+    configurationService.getArduinoConfig().then((data) => {
+        res.status(200).send(data);
+    }).catch((error) => {
+      res.status(404).send('Not found');
+    })
+  });
+
   router.post('/saveConfiguration', (req, res) => {
     configurationService.setConfigurations(req.body).then((data) => {
         res.status(200).send(data);

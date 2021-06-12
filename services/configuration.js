@@ -1,15 +1,4 @@
-const configurationList = [
-    {
-        id: 1,
-        color: 0,
-        rangeType: 1
-    },
-    {
-        id: 2,
-        color: 2,
-        rangeType: 2
-    }
-];
+const configurationList = [];
 
 function getAllConfigurations() {
     return new Promise((resolve, reject) => {
@@ -72,11 +61,29 @@ function updateConfigurations(configuration) {
     })
 }
 
+function getArduinoConfig() {
+    const configurations = configurationList.map(config => {
+        return {
+            min: config.range.min,
+            max: config.range.max,
+            color: config.color
+        }
+    });
+
+    return new Promise((resolve, reject) => {
+        resolve({
+            amountConfigurations: configurationList.length,
+            configurations: configurations
+        });
+    })
+}
+
 const service = {
     getAllConfigurations: getAllConfigurations,
     setConfigurations: setConfigurations,
     deleteConfigurations: deleteConfigurations,
-    updateConfigurations: updateConfigurations
+    updateConfigurations: updateConfigurations,
+    getArduinoConfig: getArduinoConfig
 }
 
 module.exports = service;
